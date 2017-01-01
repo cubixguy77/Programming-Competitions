@@ -1,0 +1,50 @@
+import java.util.*;
+import java.io.*;
+
+
+public class C {
+     
+     private static String inputFile = "j.in";
+     private static String outputFile = "j.test";
+     private static String answerFile = "j.out";
+
+     private static int w;
+     private static int h;
+     public static String[][] board;
+     
+     public static int getRow(int index) {
+          return (index-1) / w; 
+     }
+     
+     public static int getCol(int index) { 
+          return (index - 1) % w;
+     }
+     
+     public static void main(String[] args) {
+          
+          try {
+               Scanner s = new Scanner(new File(inputFile));
+               clearFile();
+               while (s.hasNextLine()) {
+                   int h = s.nextInt();
+                   int w = s.nextInt();
+                   
+                   board = new String[3][4];
+                   String line;
+                   while (!(line = s.nextLine().equals("0"))) {
+                        StringTokenizer st = new StringTokenizer(line);
+                        int index = Integer.parseInt(st.nextToken());
+                        board[getRow(index)][getCol(index)] = line.substring(line.indexOf(' ')+1, line.length());
+                   }
+               }              
+          }
+          catch (java.io.FileNotFoundException e) {  }
+          catch (java.util.NoSuchElementException e) { ; }
+          
+          //judge();
+     }
+     
+     public static void writeLine(String line) {               try {               FileWriter out = new FileWriter(outputFile, true);               out.write(line + "\n");               out.close();          }          catch(java.io.IOException e) {   }               }     public static void clearFile() {          File file = new File(outputFile);          file.delete();       }
+     public static void judge() {         judger.judge(outputFile, answerFile);    }
+ 
+}

@@ -1,0 +1,34 @@
+import java.util.*;
+import java.io.*;
+
+
+class Main {
+     
+     private static String inputFile = "a.in";
+     private static String outputFile = "a.test";
+     
+     
+     public static void go() {
+          try {
+               Scanner s = new Scanner(System.in);
+               String useless = s.nextLine();
+               while (s.hasNextLine()) {
+                    
+                    String name = s.nextLine();
+                    
+                    
+               }
+               
+          }
+     //     catch (java.io.FileNotFoundException e) {  }
+          catch (java.util.NoSuchElementException e) { ; }
+          
+     }
+     
+     public static void main(String[] args) {
+          
+          Main a = new Main();
+          a.go();
+     }
+        
+}

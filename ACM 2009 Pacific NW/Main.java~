@@ -1,0 +1,68 @@
+import java.util.*;
+import java.io.*;
+
+
+public class Main {
+     
+     private static String inputFile = "a.in";
+     private static String outputFile = "a.test";
+     private static String answerFile = "a.out";
+     
+  
+     public static int getCycleLength(int mod) {
+          String s = "01";
+          long n1 = 1;
+          long n2 = 0;
+          
+          int first = 0;
+          Boolean done = false;
+          while (!done) {
+               System.out.println(n1 + " " + n2 + "(" + s + ")");
+               long nextchar = get(n1, n2, mod);
+               
+               if (nextchar == first) {
+                    System.out.println("Checking (" + s + ") = (" + getSeq(mod, n1, n2, s.length()) + ")");
+                    if (s.equals(getSeq(mod, n1, n2, s.length())))
+                         return s.length();
+                    else
+                         s += nextchar + "";
+               }
+               else
+                    s += nextchar + "";
+               
+               long next = (n1%mod) + (n2%mod);
+               n2 = n1;
+               n1 = next;
+          }
+          return s.length();
+     }
+     
+     public static long get(long a, long b, int mod)         {  return ((a%mod) + (b%mod)) % mod;  }
+     public static String getSeq(int mod, long n1, long n2, int length) {
+          String s = "";
+          for (int i=0; i<length; i++) {
+               long nextchar = get(n1, n2, mod);
+               
+               s += nextchar + "";
+               long next = (n1%mod) + (n2%mod);
+               n2 = n1;
+               n1 = next;               
+          }
+          return s;
+     }
+     
+     public static void main(String[] asddf) {
+          
+          try {
+               Scanner s = new Scanner(System.in);
+               int mod;
+               while (s.hasNextLine()) {
+                    mod = s.nextInt();
+                    if (mod != 0)
+                         System.out.println("ANSWER "  + mod + " " + getCycleLength(mod));
+               }               
+          }
+          
+          catch (java.util.NoSuchElementException e) { ; }          
+     }
+}

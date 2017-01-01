@@ -1,0 +1,35 @@
+import java.util.*;
+import java.io.*;
+
+
+public class A {
+     
+     private static String inputFile = "a.in";
+     private static String outputFile = "a.test";
+     private static String answerFile = "a.out";
+     
+     
+     public static void main() {
+          
+          try {
+               Scanner s = new Scanner(new File(inputFile));
+               clearFile();
+               
+               int numcases = Integer.parseInt(s.nextLine());
+               
+               while (s.hasNextLine()) {
+                    int n = s.nextInt();
+                                        
+               }
+          }
+          
+          catch (java.io.FileNotFoundException e) {  }
+          catch (java.util.NoSuchElementException e) { ; }
+          
+          //judge();
+     }
+     
+     public static void writeLine(String line) {               try {               FileWriter out = new FileWriter(outputFile, true);               out.write(line + "\n");               out.close();          }          catch(java.io.IOException e) {   }               }     public static void clearFile() {          File file = new File(outputFile);          file.delete();       }
+     public static void judge() {         judger.judge(outputFile, answerFile);    }
+     
+}

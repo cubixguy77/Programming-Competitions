@@ -1,0 +1,108 @@
+import java.util.*;
+import java.io.*;
+
+
+public class A {
+     
+     private static String inputFile = "a.in";
+     private static String outputFile = "a.test";
+     private static String answerFile = "a.out";
+     
+     private static point[] mines;
+     private static point[] zombies;
+     
+     private class point {
+          int x;
+          int y;
+          public point(int x, int y) {
+               this.x = x;
+               this.y = y;
+          }          
+     }
+     
+     public static int sqdist(point p1, point p2) {
+          return ( (p1.x - p2.x) * (p1.x - p2.x) ) + ( (p1.y - p2.y) * (p1.y - p2.y) );
+     }
+     public static double dist(point p1, point p2) {
+          return Math.sqrt(sqdist(p1, p2));
+     }
+     
+     public static int abs(int x) {
+          if (x < 0) 
+               return x * -1;
+          return x;
+     }
+     
+     public static point[] addPoint(point[] points, point p) {
+          if (points[points.length - 1] != null)
+               addRoom(points)[points.length] = p;
+          else
+               points[points.length - 1] = p;
+          return points;
+     }
+     
+     public static point[] addRoom(point[] points) {
+          point[] newarray = new point[points.length + 1];
+          for (int i=0; i<points.length; i++)
+               newarray[i] = points[i];
+          return newarray;
+     }
+     
+     public static void getResult() {
+          
+          double max = 0.0;
+          for (int m=0; m<mines.length; m++) {
+               for (int z=0; z<zombies.length; z++) {
+                    double distance = dist(mines[m], zombies[z]);
+                    if (distance > max)
+                         max = distance;
+               }
+          }
+          System.out.println(max);          
+     }
+     
+     
+     
+     public void main() {
+          
+          try {
+               Scanner s = new Scanner(new File(inputFile));
+               clearFile();
+               
+               int numcases = Integer.parseInt(s.nextLine());
+               
+               while (s.hasNextLine()) {
+                    int numcols = s.nextInt();
+                    int numrows = s.nextInt();
+                    
+                    mines = new point[1];
+                    zombies = new point[1];
+                    
+                    for (int row=0; row<numrows; row++) {
+                         for (int col=0; col<numcols; col++) {
+                              char c = (char) s.nextByte();
+                              System.out.print(c + "");
+                              if (c == 'M')
+                                   mines = addPoint(mines, new point(col, row));
+                              else if (c == 'Z')
+                                   zombies = addPoint(zombies, new point(col, row));
+                              else
+                                   ;
+                         }              
+                         System.out.println("");
+                    }
+                    
+                    getResult();
+               }
+          }
+          
+          catch (java.io.FileNotFoundException e) {  }
+          catch (java.util.NoSuchElementException e) { ; }
+          
+          //judge();
+     }
+     
+     public static void writeLine(String line) {               try {               FileWriter out = new FileWriter(outputFile, true);               out.write(line + "\n");               out.close();          }          catch(java.io.IOException e) {   }               }     public static void clearFile() {          File file = new File(outputFile);          file.delete();       }
+     public static void judge() {         judger.judge(outputFile, answerFile);    }
+     
+}
